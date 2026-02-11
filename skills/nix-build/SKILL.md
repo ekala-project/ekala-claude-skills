@@ -36,15 +36,15 @@ Activate when the user:
    - Help configure substituters when appropriate
 
 4. **Common build patterns**
-   - Building with specific attributes: `nix-build -A packageName`
-   - Building from expressions: `nix-build '<nixpkgs>' -A package`
+   - Building with specific attributes: `nix-build -A packageName` when a default.nix is present
+   - Building from expressions: `nix-build -E 'with import ./. {}; foo'`
    - Out-of-tree builds: `nix-build /path/to/derivation`
    - Building multiple outputs: handling .dev, .out, .lib outputs
 
 ## Troubleshooting guidelines
 
 When builds fail:
-1. Read the full build log to identify the error
+1. Read the full build log to identify the error, `nix log /nix/store/<hash>-<name>.drv` is helpful
 2. Check if it's a common issue (hash mismatch, missing dependency, network timeout)
 3. Verify Nix expression syntax is correct
 4. Ensure all build inputs are properly declared

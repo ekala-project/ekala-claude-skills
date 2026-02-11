@@ -86,4 +86,4 @@ MIT
 
 ## Author
 
-Ekala
+Jonathan Ringer and Ekala contributors
