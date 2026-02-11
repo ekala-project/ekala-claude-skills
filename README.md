@@ -12,31 +12,9 @@ This plugin provides specialized skills to enhance Claude Code's capabilities wh
 
 The `nix-build` skill assists with building Nix packages using nix-build and related Nix commands.
 
-**Capabilities:**
-- Execute nix-build and nix build commands with appropriate flags
-- Analyze and troubleshoot build failures
-- Optimize build processes with parallel builds and caching
-- Handle common Nix build patterns and outputs
-- Provide detailed error diagnostics with --show-trace and --verbose
+### nix-eval
 
-**When it activates:**
-- When you mention building a Nix package or derivation
-- When working with default.nix or shell.nix files for builds
-- When debugging Nix build failures
-- When asking about Nix package compilation
-
-**Example usage:**
-```
-Build the package in default.nix
-```
-
-```
-The nix-build failed with a hash mismatch error, can you help?
-```
-
-```
-Build myPackage with verbose output and keep the failed build directory
-```
+The `nix-eval` skill assists with exploring nix evaluation and inspecting nix expressions.
 
 ## Installation
 
