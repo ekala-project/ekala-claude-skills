@@ -16,6 +16,10 @@ The `nix-build` skill assists with building Nix packages using nix-build and rel
 
 The `nix-eval` skill assists with exploring nix evaluation and inspecting nix expressions.
 
+### ekala-cmake-nix
+
+The `ekala-cmake-nix` skill assists with building CMake-based Nix packages, understanding cmake-specific Nix attributes, and troubleshooting CMake builds in Nix. It provides comprehensive documentation of all Nix attributes that influence CMake builds (from the cmake setup-hook) and includes examples and best practices.
+
 ## Installation
 
 ### As a Plugin
