@@ -1,0 +1,37 @@
+name: Validate Skills
+
+on:
+  pull_request:
+    branches: [ master, main ]
+    paths:
+      - 'skills/**'
+      - 'scripts/**'
+      - '.github/workflows/validate-skills.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Quality Checks
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate YAML frontmatter
+        run: ./scripts/validate-frontmatter.sh
+
+      - name: Validate file structure
+        run: ./scripts/validate-structure.sh
+
+      - name: Validate naming conventions
+        run: ./scripts/validate-naming.sh
+
+      - name: Validate documentation completeness
+        run: ./scripts/validate-documentation.sh
+
+      - name: Validate markdown formatting
+        run: ./scripts/validate-markdown.sh
+
+      - name: All checks passed
+        if: success()
+        run: echo "✅ All quality checks passed successfully!"
