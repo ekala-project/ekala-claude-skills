@@ -1,0 +1,57 @@
+{
+  "$schema": "../../../schemas/skill-metadata.schema.json",
+  "id": "development/ekala-cmake-nix",
+  "name": "ekala-cmake-nix",
+  "displayName": "CMake+Nix Build Assistant",
+  "description": "Assists with building CMake-based Nix packages, understanding cmake-specific Nix attributes, and troubleshooting CMake builds in Nix",
+  "longDescription": "A comprehensive skill for building CMake-based Nix packages, understanding cmake-specific Nix attributes, and troubleshooting CMake builds in Nix. Provides detailed documentation of all Nix attributes that influence CMake builds and includes extensive examples and best practices.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Jonathan Ringer",
+    "github": "jonringer"
+  },
+  "contributors": [],
+  "maintainers": ["jonringer"],
+  "license": "MIT",
+  "categories": ["development", "devops"],
+  "tags": ["nix", "cmake", "build", "c", "cpp", "package-management", "troubleshooting"],
+  "keywords": ["cmake", "nix", "build", "c++", "c", "makefile", "ninja", "nixpkgs"],
+  "compatibility": {
+    "claudeCode": ">=1.0.0",
+    "platforms": ["linux", "macos"],
+    "requiredTools": ["nix", "cmake"],
+    "optionalTools": ["ninja", "git", "jq"]
+  },
+  "quality": {
+    "verified": true,
+    "communityRating": 0,
+    "totalRatings": 0,
+    "downloads": 0,
+    "lastUpdated": "2026-02-12T20:30:00Z",
+    "createdAt": "2026-02-12T20:30:00Z"
+  },
+  "documentation": {
+    "readme": "README.md",
+    "changelog": "CHANGELOG.md",
+    "examples": [],
+    "externalLinks": {
+      "repository": "https://github.com/ekala/ekala-claude-skills",
+      "issues": "https://github.com/ekala/ekala-claude-skills/issues"
+    }
+  },
+  "testing": {
+    "hasTests": false,
+    "testStatus": "unknown"
+  },
+  "security": {
+    "hasSecurityPolicy": false,
+    "knownVulnerabilities": []
+  },
+  "dependencies": {
+    "skills": [],
+    "plugins": []
+  },
+  "relatedSkills": ["development/nix-build", "development/nix-eval"],
+  "status": "stable",
+  "deprecated": false
+}

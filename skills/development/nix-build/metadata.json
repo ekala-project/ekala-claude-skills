@@ -1,0 +1,57 @@
+{
+  "$schema": "../../../schemas/skill-metadata.schema.json",
+  "id": "development/nix-build",
+  "name": "nix-build",
+  "displayName": "Nix Build Assistant",
+  "description": "Assists with building Nix packages using nix-build and related Nix commands",
+  "longDescription": "A comprehensive skill for building Nix packages efficiently and troubleshooting build issues. Provides expert guidance on nix-build commands, build optimization, and common build patterns.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Jonathan Ringer",
+    "github": "jonringer"
+  },
+  "contributors": [],
+  "maintainers": ["jonringer"],
+  "license": "MIT",
+  "categories": ["development", "devops"],
+  "tags": ["nix", "nixpkgs", "build", "package-management", "troubleshooting", "nix-build"],
+  "keywords": ["nix-build", "nix build", "derivation", "flakes", "nixos"],
+  "compatibility": {
+    "claudeCode": ">=1.0.0",
+    "platforms": ["linux", "macos"],
+    "requiredTools": ["nix"],
+    "optionalTools": ["git", "nix-prefetch-url"]
+  },
+  "quality": {
+    "verified": true,
+    "communityRating": 0,
+    "totalRatings": 0,
+    "downloads": 0,
+    "lastUpdated": "2026-02-12T20:30:00Z",
+    "createdAt": "2026-02-12T20:30:00Z"
+  },
+  "documentation": {
+    "readme": "README.md",
+    "changelog": "CHANGELOG.md",
+    "examples": [],
+    "externalLinks": {
+      "repository": "https://github.com/ekala/ekala-claude-skills",
+      "issues": "https://github.com/ekala/ekala-claude-skills/issues"
+    }
+  },
+  "testing": {
+    "hasTests": false,
+    "testStatus": "unknown"
+  },
+  "security": {
+    "hasSecurityPolicy": false,
+    "knownVulnerabilities": []
+  },
+  "dependencies": {
+    "skills": [],
+    "plugins": []
+  },
+  "relatedSkills": ["development/nix-eval", "development/ekala-cmake-nix"],
+  "status": "stable",
+  "deprecated": false
+}

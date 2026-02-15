@@ -1,6 +1,17 @@
 {
   "name": "ekala-claude-skills",
-  "description": "A collection of Claude Code skills for Nix development workflows",
-  "version": "0.1.0",
-  "author": "Ekala Contributors"
+  "description": "A community marketplace of Claude Code skills for Nix development workflows and beyond",
+  "version": "1.0.0",
+  "author": "Jonathan Ringer and Ekala Contributors",
+  "homepage": "https://ekala.github.io/ekala-claude-skills/docs/marketplace/",
+  "repository": "https://github.com/ekala/ekala-claude-skills",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "skills",
+    "nix",
+    "marketplace",
+    "development",
+    "devops"
+  ]
 }

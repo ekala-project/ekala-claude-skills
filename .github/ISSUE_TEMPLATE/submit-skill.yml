@@ -1,0 +1,129 @@
+name: Submit a Skill
+description: Submit a new Claude Code skill to the marketplace
+title: "[Skill Submission] "
+labels: ["skill-submission", "needs-review"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Submit a New Skill
+
+        Thank you for contributing to the Claude Code Skills Marketplace!
+        Please fill out this form to submit your skill for review.
+
+  - type: input
+    id: skill-name
+    attributes:
+      label: Skill Name
+      description: Technical name (lowercase, hyphenated)
+      placeholder: my-awesome-skill
+    validations:
+      required: true
+
+  - type: input
+    id: display-name
+    attributes:
+      label: Display Name
+      description: Human-readable name
+      placeholder: My Awesome Skill
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Short description (50-200 characters)
+      placeholder: Assists with building and deploying awesome applications
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Primary Category
+      options:
+        - development
+        - data-science
+        - devops
+        - writing
+        - research
+        - design
+        - productivity
+        - education
+        - other
+    validations:
+      required: true
+
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: Comma-separated tags for discovery
+      placeholder: python, testing, automation
+    validations:
+      required: true
+
+  - type: textarea
+    id: skill-content
+    attributes:
+      label: Skill Content (SKILL.md)
+      description: Paste the complete content of your SKILL.md file
+      placeholder: |
+        ---
+        name: my-skill
+        description: A helpful skill
+        ---
+
+        You are a specialist in...
+      render: markdown
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Semantic version (e.g., 1.0.0)
+      placeholder: 1.0.0
+    validations:
+      required: true
+
+  - type: input
+    id: license
+    attributes:
+      label: License
+      description: SPDX license identifier
+      placeholder: MIT
+    validations:
+      required: true
+
+  - type: textarea
+    id: testing
+    attributes:
+      label: Testing
+      description: How have you tested this skill?
+      placeholder: Tested with Claude Code 1.0 on Linux and macOS...
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Submission Checklist
+      options:
+        - label: I have tested this skill locally
+          required: true
+        - label: I have verified no sensitive information is included
+          required: true
+        - label: I agree to the Code of Conduct
+          required: true
+        - label: I have the right to submit this under the repository's license
+          required: true
+
+  - type: textarea
+    id: additional-notes
+    attributes:
+      label: Additional Notes
+      description: Any other information that would be helpful

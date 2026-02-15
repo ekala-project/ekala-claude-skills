@@ -1,0 +1,66 @@
+{
+  "category": "devops",
+  "totalSkills": 2,
+  "generatedAt": "2026-02-13T08:07:50.703Z",
+  "skills": [
+    {
+      "id": "development/ekala-cmake-nix",
+      "name": "ekala-cmake-nix",
+      "displayName": "CMake+Nix Build Assistant",
+      "description": "Assists with building CMake-based Nix packages, understanding cmake-specific Nix attributes, and troubleshooting CMake builds in Nix",
+      "version": "1.0.0",
+      "author": "Jonathan Ringer",
+      "authorGithub": "jonringer",
+      "categories": [
+        "development",
+        "devops"
+      ],
+      "tags": [
+        "nix",
+        "cmake",
+        "build",
+        "c",
+        "cpp",
+        "package-management",
+        "troubleshooting"
+      ],
+      "quality": {
+        "verified": true,
+        "rating": 0,
+        "downloads": 0
+      },
+      "lastUpdated": "2026-02-12T20:30:00Z",
+      "skillPath": "skills/development/ekala-cmake-nix/SKILL.md",
+      "metadataPath": "skills/development/ekala-cmake-nix/metadata.json"
+    },
+    {
+      "id": "development/nix-build",
+      "name": "nix-build",
+      "displayName": "Nix Build Assistant",
+      "description": "Assists with building Nix packages using nix-build and related Nix commands",
+      "version": "1.0.0",
+      "author": "Jonathan Ringer",
+      "authorGithub": "jonringer",
+      "categories": [
+        "development",
+        "devops"
+      ],
+      "tags": [
+        "nix",
+        "nixpkgs",
+        "build",
+        "package-management",
+        "troubleshooting",
+        "nix-build"
+      ],
+      "quality": {
+        "verified": true,
+        "rating": 0,
+        "downloads": 0
+      },
+      "lastUpdated": "2026-02-12T20:30:00Z",
+      "skillPath": "skills/development/nix-build/SKILL.md",
+      "metadataPath": "skills/development/nix-build/metadata.json"
+    }
+  ]
+}
