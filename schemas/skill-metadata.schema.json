@@ -1,0 +1,336 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/ekala/claude-skills/main/schemas/skill-metadata.schema.json",
+  "title": "Claude Code Skill Metadata",
+  "description": "Schema for Claude Code skill metadata",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "displayName",
+    "description",
+    "version",
+    "author",
+    "license",
+    "categories",
+    "tags"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to the JSON schema for validation"
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the skill (e.g., 'development/nix-build')",
+      "pattern": "^[a-z0-9-]+/[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string",
+      "description": "Technical name of the skill (lowercase, hyphenated)",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable name for the skill",
+      "minLength": 3,
+      "maxLength": 50
+    },
+    "description": {
+      "type": "string",
+      "description": "Short description of what the skill does",
+      "minLength": 20,
+      "maxLength": 200
+    },
+    "longDescription": {
+      "type": "string",
+      "description": "Detailed description of the skill's capabilities"
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version of the skill",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+    },
+    "author": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Author's name"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Author's email address"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Author's website or profile URL"
+        },
+        "github": {
+          "type": "string",
+          "description": "GitHub username"
+        }
+      }
+    },
+    "contributors": {
+      "type": "array",
+      "description": "List of contributors to the skill",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "github": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "maintainers": {
+      "type": "array",
+      "description": "GitHub usernames of current maintainers",
+      "items": {
+        "type": "string"
+      }
+    },
+    "license": {
+      "type": "string",
+      "description": "SPDX license identifier",
+      "enum": ["MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "GPL-3.0", "LGPL-3.0", "MPL-2.0", "ISC", "CC0-1.0", "Unlicense"]
+    },
+    "categories": {
+      "type": "array",
+      "description": "Primary categories for the skill",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "type": "string",
+        "enum": ["development", "data-science", "devops", "writing", "research", "design", "productivity", "education", "other"]
+      }
+    },
+    "tags": {
+      "type": "array",
+      "description": "Tags for discovery and search",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]+$"
+      }
+    },
+    "keywords": {
+      "type": "array",
+      "description": "Search keywords",
+      "items": {
+        "type": "string"
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "description": "Compatibility requirements",
+      "properties": {
+        "claudeCode": {
+          "type": "string",
+          "description": "Minimum Claude Code version (semver range)"
+        },
+        "platforms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["linux", "macos", "windows"]
+          }
+        },
+        "requiredTools": {
+          "type": "array",
+          "description": "Required command-line tools",
+          "items": {
+            "type": "string"
+          }
+        },
+        "optionalTools": {
+          "type": "array",
+          "description": "Optional tools that enhance functionality",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "description": "Quality metrics (auto-populated)",
+      "properties": {
+        "verified": {
+          "type": "boolean",
+          "description": "Whether the skill has been verified by maintainers"
+        },
+        "communityRating": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "totalRatings": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "downloads": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "documentation": {
+      "type": "object",
+      "description": "Documentation files and links",
+      "properties": {
+        "readme": {
+          "type": "string",
+          "description": "Path to README file"
+        },
+        "changelog": {
+          "type": "string",
+          "description": "Path to CHANGELOG file"
+        },
+        "examples": {
+          "type": "array",
+          "description": "Paths to example files",
+          "items": {
+            "type": "string"
+          }
+        },
+        "externalLinks": {
+          "type": "object",
+          "properties": {
+            "homepage": {
+              "type": "string",
+              "format": "uri"
+            },
+            "repository": {
+              "type": "string",
+              "format": "uri"
+            },
+            "issues": {
+              "type": "string",
+              "format": "uri"
+            },
+            "discussions": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "assets": {
+      "type": "object",
+      "description": "Visual assets",
+      "properties": {
+        "icon": {
+          "type": "string",
+          "description": "Path to icon file"
+        },
+        "screenshots": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "testing": {
+      "type": "object",
+      "description": "Testing information",
+      "properties": {
+        "hasTests": {
+          "type": "boolean"
+        },
+        "testCoverage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "lastTestRun": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "testStatus": {
+          "type": "string",
+          "enum": ["passing", "failing", "unknown"]
+        }
+      }
+    },
+    "security": {
+      "type": "object",
+      "description": "Security information",
+      "properties": {
+        "hasSecurityPolicy": {
+          "type": "boolean"
+        },
+        "lastSecurityAudit": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "knownVulnerabilities": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "dependencies": {
+      "type": "object",
+      "description": "Dependencies on other skills or plugins",
+      "properties": {
+        "skills": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "plugins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "relatedSkills": {
+      "type": "array",
+      "description": "Related skills that users might find useful",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the skill",
+      "enum": ["experimental", "stable", "mature", "deprecated"],
+      "default": "stable"
+    },
+    "deprecated": {
+      "type": "boolean",
+      "description": "Whether this skill is deprecated",
+      "default": false
+    },
+    "replacedBy": {
+      "type": "string",
+      "description": "If deprecated, the skill ID that replaces this one"
+    }
+  },
+  "additionalProperties": false
+}

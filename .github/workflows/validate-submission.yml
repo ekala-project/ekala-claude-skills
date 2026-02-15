@@ -1,0 +1,65 @@
+name: Validate Skill Submission
+
+on:
+  pull_request:
+    paths:
+      - 'skills/**'
+      - 'schemas/**'
+      - 'scripts/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate schema
+        run: npm run validate:schema
+
+      - name: Check quality
+        run: npm run validate:quality
+
+      - name: Security scan
+        run: npm run validate:security
+
+      - name: Full validation
+        run: npm run validate
+
+      - name: Comment PR
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const { execSync } = require('child_process');
+
+            let comment = '## Skill Validation Results\n\n';
+
+            try {
+              const output = execSync('npm run validate 2>&1', { encoding: 'utf-8' });
+              comment += '✅ All validations passed!\n\n';
+              comment += '<details><summary>Details</summary>\n\n```\n' + output + '\n```\n</details>';
+            } catch (error) {
+              comment += '❌ Validation failed\n\n';
+              comment += '<details><summary>Errors</summary>\n\n```\n' + error.stdout + '\n```\n</details>';
+            }
+
+            comment += '\n\nPlease review the validation results before merging.';
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

@@ -1,0 +1,36 @@
+{
+  "name": "ekala-claude-skills",
+  "version": "1.0.0",
+  "description": "A community marketplace of Claude Code skills for Nix development workflows",
+  "scripts": {
+    "validate": "node scripts/validate-skill.js",
+    "validate:schema": "node scripts/validate-skill.js --schema-only",
+    "validate:quality": "node scripts/check-quality.js",
+    "validate:security": "node scripts/check-security.js",
+    "generate:catalog": "node scripts/generate-catalog.js",
+    "test": "npm run validate && npm run validate:quality && npm run validate:security"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ekala/ekala-claude-skills.git"
+  },
+  "keywords": [
+    "claude-code",
+    "skills",
+    "nix",
+    "marketplace",
+    "ai",
+    "development"
+  ],
+  "author": "Jonathan Ringer and Ekala contributors",
+  "license": "MIT",
+  "devDependencies": {
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1",
+    "glob": "^10.3.10",
+    "js-yaml": "^4.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

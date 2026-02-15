@@ -1,0 +1,98 @@
+name: Report a Skill Issue
+description: Report a bug or problem with a skill
+title: "[Bug] "
+labels: ["bug", "needs-triage"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Report a Skill Issue
+
+        Thank you for helping us improve the marketplace!
+        Please provide as much detail as possible.
+
+  - type: dropdown
+    id: skill
+    attributes:
+      label: Which skill is affected?
+      options:
+        - nix-build
+        - nix-eval
+        - ekala-cmake-nix
+        - Other (specify below)
+    validations:
+      required: true
+
+  - type: input
+    id: skill-other
+    attributes:
+      label: If "Other", specify skill name
+      placeholder: skill-name
+
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: Issue Type
+      options:
+        - Skill not working as expected
+        - Incorrect documentation
+        - Missing functionality
+        - Performance issue
+        - Security concern
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Clear description of the issue
+      placeholder: When I try to... the skill...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this issue?
+      placeholder: |
+        1. Activate skill with...
+        2. Run command...
+        3. See error...
+
+  - type: input
+    id: claude-version
+    attributes:
+      label: Claude Code Version
+      placeholder: 1.0.0
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating System
+      placeholder: Ubuntu 22.04 / macOS 14.0 / etc.
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other relevant information

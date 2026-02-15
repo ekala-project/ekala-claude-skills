@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code Skills Marketplace</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .search-bar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-bar input:focus {
+            border-color: #667eea;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .filter-group select {
+            padding: 0.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .filter-group select:hover {
+            border-color: #667eea;
+        }
+
+        .stats {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .stat {
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 0.75rem;
+        }
+
+        .skill-name {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .skill-badge {
+            font-size: 1.5rem;
+        }
+
+        .skill-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .skill-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: #f0f0f0;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .tag.category {
+            background: #e3f2fd;
+            color: #1976d2;
+            font-weight: 600;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #999;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.2rem;
+            color: #667eea;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.75rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🚀 Claude Code Skills Marketplace</h1>
+        <p>Discover and install skills to enhance your Claude Code experience</p>
+    </header>
+
+    <div class="container">
+        <div class="search-bar">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search skills by name, description, or tags..."
+            >
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="categoryFilter">Category:</label>
+                    <select id="categoryFilter">
+                        <option value="">All Categories</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sortBy">Sort by:</label>
+                    <select id="sortBy">
+                        <option value="name">Name</option>
+                        <option value="updated">Recently Updated</option>
+                        <option value="downloads">Most Popular</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats" id="stats">
+            <div class="stat">
+                <div class="stat-value" id="totalSkills">-</div>
+                <div class="stat-label">Total Skills</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="totalCategories">-</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="verifiedSkills">-</div>
+                <div class="stat-label">Verified</div>
+            </div>
+        </div>
+
+        <div id="skillsContainer" class="skills-grid">
+            <div class="loading">Loading skills...</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            <a href="https://github.com/ekala/ekala-claude-skills">GitHub</a> |
+            <a href="../../docs/CONTRIBUTING.md">Contribute</a> |
+            <a href="../../docs/SUBMISSION_GUIDE.md">Submit a Skill</a>
+        </p>
+        <p style="margin-top: 1rem; opacity: 0.7;">
+            Built with ❤️ for the Claude Code community
+        </p>
+    </footer>
+
+    <script>
+        let allSkills = [];
+        let filteredSkills = [];
+
+        async function loadSkills() {
+            try {
+                const response = await fetch('../../catalog/index.json');
+                const data = await response.json();
+
+                allSkills = data.skills;
+                filteredSkills = allSkills;
+
+                // Update stats
+                document.getElementById('totalSkills').textContent = data.totalSkills;
+                document.getElementById('totalCategories').textContent = Object.keys(data.categories).length;
+                document.getElementById('verifiedSkills').textContent =
+                    allSkills.filter(s => s.quality.verified).length;
+
+                // Populate category filter
+                const categoryFilter = document.getElementById('categoryFilter');
+                Object.keys(data.categories).sort().forEach(cat => {
+                    const option = document.createElement('option');
+                    option.value = cat;
+                    option.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+                    categoryFilter.appendChild(option);
+                });
+
+                renderSkills();
+            } catch (error) {
+                document.getElementById('skillsContainer').innerHTML =
+                    '<div class="no-results">Failed to load skills. Please try again later.</div>';
+                console.error('Error loading skills:', error);
+            }
+        }
+
+        function getQualityBadge(verified) {
+            return verified ? '✅' : '';
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        }
+
+        function renderSkills() {
+            const container = document.getElementById('skillsContainer');
+
+            if (filteredSkills.length === 0) {
+                container.innerHTML = '<div class="no-results">No skills found matching your criteria.</div>';
+                return;
+            }
+
+            container.innerHTML = filteredSkills.map(skill => `
+                <div class="skill-card" onclick="window.open('https://github.com/ekala/ekala-claude-skills/tree/main/${skill.skillPath.replace('/SKILL.md', '')}', '_blank')">
+                    <div class="skill-header">
+                        <div class="skill-name">${skill.displayName}</div>
+                        <div class="skill-badge">${getQualityBadge(skill.quality.verified)}</div>
+                    </div>
+                    <div class="skill-description">${skill.description}</div>
+                    <div class="skill-meta">
+                        <span>📦 v${skill.version}</span>
+                        <span>👤 ${skill.author}</span>
+                        <span>📅 ${formatDate(skill.lastUpdated)}</span>
+                    </div>
+                    <div class="skill-tags">
+                        ${skill.categories.map(cat =>
+                            `<span class="tag category">${cat}</span>`
+                        ).join('')}
+                        ${skill.tags.slice(0, 3).map(tag =>
+                            `<span class="tag">${tag}</span>`
+                        ).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterSkills() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('categoryFilter').value;
+
+            filteredSkills = allSkills.filter(skill => {
+                const matchesSearch = !searchTerm ||
+                    skill.name.toLowerCase().includes(searchTerm) ||
+                    skill.displayName.toLowerCase().includes(searchTerm) ||
+                    skill.description.toLowerCase().includes(searchTerm) ||
+                    skill.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+
+                const matchesCategory = !category || skill.categories.includes(category);
+
+                return matchesSearch && matchesCategory;
+            });
+
+            sortSkills();
+            renderSkills();
+        }
+
+        function sortSkills() {
+            const sortBy = document.getElementById('sortBy').value;
+
+            filteredSkills.sort((a, b) => {
+                switch (sortBy) {
+                    case 'name':
+                        return a.name.localeCompare(b.name);
+                    case 'updated':
+                        return new Date(b.lastUpdated) - new Date(a.lastUpdated);
+                    case 'downloads':
+                        return (b.quality.downloads || 0) - (a.quality.downloads || 0);
+                    default:
+                        return 0;
+                }
+            });
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', filterSkills);
+        document.getElementById('categoryFilter').addEventListener('change', filterSkills);
+        document.getElementById('sortBy').addEventListener('change', () => {
+            sortSkills();
+            renderSkills();
+        });
+
+        // Load skills on page load
+        loadSkills();
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+name: Quality Metrics
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  update-metrics:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Calculate quality scores
+        run: npm run validate:quality
+
+      - name: Generate quality report
+        run: |
+          echo "# Quality Metrics Report" > quality-report.md
+          echo "" >> quality-report.md
+          echo "Generated: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> quality-report.md
+          echo "" >> quality-report.md
+          npm run validate:quality >> quality-report.md 2>&1
+
+      - name: Upload quality report
+        uses: actions/upload-artifact@v4
+        with:
+          name: quality-report
+          path: quality-report.md
+          retention-days: 90

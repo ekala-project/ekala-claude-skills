@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/ekala/claude-skills/main/schemas/catalog-entry.schema.json",
+  "title": "Catalog Entry",
+  "description": "Schema for skill entries in the catalog index",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "displayName",
+    "description",
+    "version",
+    "author",
+    "categories",
+    "tags",
+    "lastUpdated",
+    "skillPath",
+    "metadataPath"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the skill"
+    },
+    "name": {
+      "type": "string",
+      "description": "Technical name of the skill"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Short description"
+    },
+    "version": {
+      "type": "string",
+      "description": "Current version"
+    },
+    "author": {
+      "type": "string",
+      "description": "Author name or organization"
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "quality": {
+      "type": "object",
+      "properties": {
+        "verified": {
+          "type": "boolean"
+        },
+        "rating": {
+          "type": "number"
+        },
+        "downloads": {
+          "type": "integer"
+        }
+      }
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "skillPath": {
+      "type": "string",
+      "description": "Path to SKILL.md file"
+    },
+    "metadataPath": {
+      "type": "string",
+      "description": "Path to metadata.json file"
+    }
+  }
+}

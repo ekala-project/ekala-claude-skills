@@ -1,0 +1,57 @@
+{
+  "$schema": "../../../schemas/skill-metadata.schema.json",
+  "id": "development/nix-eval",
+  "name": "nix-eval",
+  "displayName": "Nix Eval Assistant",
+  "description": "Assists with evaluating Nix expressions using nix-instantiate, nix eval, and related evaluation commands",
+  "longDescription": "A comprehensive skill for evaluating Nix expressions, inspecting derivations, and understanding Nix language semantics. Provides expert guidance on evaluation commands, derivation inspection, and debugging evaluation issues.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Jonathan Ringer",
+    "github": "jonringer"
+  },
+  "contributors": [],
+  "maintainers": ["jonringer"],
+  "license": "MIT",
+  "categories": ["development"],
+  "tags": ["nix", "nixpkgs", "evaluation", "nix-instantiate", "nix-eval", "derivation", "debugging"],
+  "keywords": ["nix eval", "nix-instantiate", "derivation", "flakes", "nixos", "evaluation"],
+  "compatibility": {
+    "claudeCode": ">=1.0.0",
+    "platforms": ["linux", "macos"],
+    "requiredTools": ["nix"],
+    "optionalTools": ["jq", "git"]
+  },
+  "quality": {
+    "verified": true,
+    "communityRating": 0,
+    "totalRatings": 0,
+    "downloads": 0,
+    "lastUpdated": "2026-02-12T20:30:00Z",
+    "createdAt": "2026-02-12T20:30:00Z"
+  },
+  "documentation": {
+    "readme": "README.md",
+    "changelog": "CHANGELOG.md",
+    "examples": [],
+    "externalLinks": {
+      "repository": "https://github.com/ekala/ekala-claude-skills",
+      "issues": "https://github.com/ekala/ekala-claude-skills/issues"
+    }
+  },
+  "testing": {
+    "hasTests": false,
+    "testStatus": "unknown"
+  },
+  "security": {
+    "hasSecurityPolicy": false,
+    "knownVulnerabilities": []
+  },
+  "dependencies": {
+    "skills": [],
+    "plugins": []
+  },
+  "relatedSkills": ["development/nix-build", "development/ekala-cmake-nix"],
+  "status": "stable",
+  "deprecated": false
+}
