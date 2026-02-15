@@ -8,6 +8,7 @@ You are a CMake+Nix build specialist. Your role is to help users build CMake-bas
 ## When to activate
 
 Activate when the user:
+
 - Works with Nix packages that use CMake as their build system
 - References cmake in nativeBuildInputs or buildInputs
 - Asks about CMake-specific Nix attributes or configuration
@@ -52,89 +53,90 @@ These attributes are respected by the Nix cmake setup-hook and control CMake bui
 ### Build directory configuration
 
 - **`cmake.configurePhaseHook`**
-  - In Ekala, this is an additional shell hook needed for the build to use cmake for the configurePhase
-  - Example: `nativeBuildInputs = [ cmake cmake.configurePhaseHook ];`
+   - In Ekala, this is an additional shell hook needed for the build to use cmake for the configurePhase
+   - Example: `nativeBuildInputs = [ cmake cmake.configurePhaseHook ];`
 
 - **`cmakeBuildDir`** (default: `"build"`)
-  - Directory for out-of-tree builds
-  - Creates and enters this directory before running cmake
-  - Should only be needed to be configured if the source directory already has a `build` directory
-  - Example: `cmakeBuildDir = "mybuild";`
+   - Directory for out-of-tree builds
+   - Creates and enters this directory before running cmake
+   - Should only be needed to be configured if the source directory already has a `build` directory
+   - Example: `cmakeBuildDir = "mybuild";`
 
 - **`cmakeDir`** (default: `".."` when using build dir, `"."` otherwise)
-  - Directory containing CMakeLists.txt, relative to build directory
-  - Use this when CMakeLists.txt is in a subdirectory
-  - Example: `cmakeDir = "../cmake_unofficial";` (see xxHash)
+   - Directory containing CMakeLists.txt, relative to build directory
+   - Use this when CMakeLists.txt is in a subdirectory
+   - Example: `cmakeDir = "../cmake_unofficial";` (see xxHash)
 
 - **`dontUseCmakeBuildDir`** (default: unset/false)
-  - If set, builds in the source directory instead of a separate build directory
-  - Example: `dontUseCmakeBuildDir = true;`
+   - If set, builds in the source directory instead of a separate build directory
+   - Example: `dontUseCmakeBuildDir = true;`
 
 ### CMake flags and options
 
 - **`cmakeFlags`** (default: `""`)
-  - String of additional flags passed to cmake
-  - Many CMAKE_INSTALL_* variables are defined in the cmakeConfigurePhase
-  - Example: `cmakeFlags = [ "-DENABLE_FEATURE=ON" "-DBUILD_SHARED_LIBS=OFF" ];`
+   - String of additional flags passed to cmake
+   - Many CMAKE_INSTALL_* variables are defined in the cmakeConfigurePhase
+   - Example: `cmakeFlags = [ "-DENABLE_FEATURE=ON" "-DBUILD_SHARED_LIBS=OFF" ];`
 
 - **`cmakeFlagsArray`** (default: `[]`)
-  - Array of additional flags passed to cmake
-  - Useful for flags with spaces or complex values
-  - Example: `cmakeFlagsArray = [ "-DCUSTOM_PATH=/my/path" ];`
+   - Array of additional flags passed to cmake
+   - Useful for flags with spaces or complex values
+   - Example: `cmakeFlagsArray = [ "-DCUSTOM_PATH=/my/path" ];`
 
 - **`cmakeBuildType`** (default: `"Release"`)
-  - Sets CMAKE_BUILD_TYPE (Release, Debug, RelWithDebInfo, MinSizeRel)
-  - Always use Release for production packages to ensure optimizations
-  - Example: `cmakeBuildType = "RelWithDebInfo";`
+   - Sets CMAKE_BUILD_TYPE (Release, Debug, RelWithDebInfo, MinSizeRel)
+   - Always use Release for production packages to ensure optimizations
+   - Example: `cmakeBuildType = "RelWithDebInfo";`
 
 ### Testing configuration
 
 - **`doCheck`** (default: unset/false)
-  - If false/unset, adds `-DBUILD_TESTING=OFF` to disable building tests
-  - Set to true to enable building and running tests
-  - Example: `doCheck = true;`
+   - If false/unset, adds `-DBUILD_TESTING=OFF` to disable building tests
+   - Set to true to enable building and running tests
+   - Example: `doCheck = true;`
 
 - **`enableParallelChecking`** (default: `true`)
-  - If set, enables parallel CTest execution
-  - Sets `CTEST_PARALLEL_LEVEL=$NIX_BUILD_CORES`
-  - Example: `enableParallelChecking = false;` to disable
+   - If set, enables parallel CTest execution
+   - Sets `CTEST_PARALLEL_LEVEL=$NIX_BUILD_CORES`
+   - Example: `enableParallelChecking = false;` to disable
 
 ### Installation configuration
 
 - **`dontAddPrefix`** (default: unset/false)
-  - If set, doesn't add `-DCMAKE_INSTALL_PREFIX=$prefix`
-  - Rarely needed, only for packages with non-standard install behavior
-  - Example: `dontAddPrefix = true;`
+   - If set, doesn't add `-DCMAKE_INSTALL_PREFIX=$prefix`
+   - Rarely needed, only for packages with non-standard install behavior
+   - Example: `dontAddPrefix = true;`
 
 - **`shareDocName`** (default: auto-detected from CMakeLists.txt or pname)
-  - Name used for documentation directory
-  - Automatically extracted from `project()` in CMakeLists.txt
-  - Falls back to pname or package name if detection fails
-  - Used for CMAKE_INSTALL_DOCDIR
-  - Example: `shareDocName = "mypackage";`
+   - Name used for documentation directory
+   - Automatically extracted from `project()` in CMakeLists.txt
+   - Falls back to pname or package name if detection fails
+   - Used for CMAKE_INSTALL_DOCDIR
+   - Example: `shareDocName = "mypackage";`
 
 ### Build behavior
 
 - **`dontFixCmake`** (default: unset/false)
-  - If set, skips fixing cmake files (replacing /usr and /opt with /var/empty)
-  - Useful if the package has unusual path requirements
-  - Example: `dontFixCmake = true;`
+   - If set, skips fixing cmake files (replacing /usr and /opt with /var/empty)
+   - Useful if the package has unusual path requirements
+   - Example: `dontFixCmake = true;`
 
 - **`enableParallelBuilding`** (default: automatically set to `1` by cmake)
-  - Automatically enabled by cmake setup-hook
-  - Rarely needs manual configuration
-  - Example: `enableParallelBuilding = false;` to disable
+   - Automatically enabled by cmake setup-hook
+   - Rarely needs manual configuration
+   - Example: `enableParallelBuilding = false;` to disable
 
 - **`enableParallelInstalling`** (default: automatically set to `1` by cmake)
-  - Automatically enabled by cmake setup-hook
-  - Allows parallel installation
-  - Example: `enableParallelInstalling = false;` to disable
+   - Automatically enabled by cmake setup-hook
+   - Allows parallel installation
+   - Example: `enableParallelInstalling = false;` to disable
 
 ## CMake variables automatically configured by Nix
 
 The cmake setup-hook automatically configures these CMAKE variables:
 
 ### Compiler and toolchain
+
 - `CMAKE_C_COMPILER=$CC`
 - `CMAKE_CXX_COMPILER=$CXX`
 - `CMAKE_AR=$(command -v $AR)`
@@ -142,6 +144,7 @@ The cmake setup-hook automatically configures these CMAKE variables:
 - `CMAKE_STRIP=$(command -v $STRIP)`
 
 ### Installation paths (using GNUInstallDirs)
+
 - `CMAKE_INSTALL_PREFIX=$prefix`
 - `CMAKE_INSTALL_BINDIR=${!outputBin}/bin`
 - `CMAKE_INSTALL_SBINDIR=${!outputBin}/sbin`
@@ -156,22 +159,26 @@ The cmake setup-hook automatically configures these CMAKE variables:
 - `CMAKE_INSTALL_NAME_DIR=${!outputLib}/lib`
 
 ### Build type and testing
+
 - `CMAKE_BUILD_TYPE=${cmakeBuildType:-Release}`
 - `BUILD_TESTING=OFF` (if doCheck is false/unset)
 - `CTEST_OUTPUT_ON_FAILURE=1` (environment variable)
 - `CTEST_PARALLEL_LEVEL=$NIX_BUILD_CORES` (environment variable, if enableParallelChecking)
 
 ### macOS-specific
+
 - `CMAKE_FIND_FRAMEWORK=LAST` (prefer Unix-style headers to Frameworks)
 - `CMAKE_OSX_SYSROOT=` (don't use global macOS SDK)
 - `CMAKE_POLICY_DEFAULT_CMP0025=NEW` (correctly detect clang compiler)
 
 ### Package registry (disabled for reproducibility)
+
 - `CMAKE_EXPORT_NO_PACKAGE_REGISTRY=ON`
 - `CMAKE_FIND_USE_PACKAGE_REGISTRY=OFF`
 - `CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY=OFF`
 
 ### Search paths
+
 - `NIXPKGS_CMAKE_PREFIX_PATH` is what ekala and nixpkgs packages will append themselves, similar to `CMAKE_PREFIX_PATH`
 - `CMAKE_INCLUDE_PATH`, `CMAKE_LIBRARY_PATH`, `CMAKE_FRAMEWORK_PATH` are populated from NIX_CFLAGS_COMPILE and NIX_LDFLAGS
 
@@ -340,6 +347,7 @@ stdenv.mkDerivation {
 **Problem**: `find_package(Foo)` fails even though Foo is in buildInputs
 
 **Solution**:
+
 1. Ensure the dependency is in `buildInputs` or `propagatedBuildInputs`
 2. Check if the dependency provides CMake config files, should be Foo-config.cmake or FooConfig.cmake
 3. Verify CMAKE_PREFIX_PATH includes the dependency (it should automatically)
@@ -351,6 +359,7 @@ stdenv.mkDerivation {
 **Problem**: Files installed to wrong locations (e.g., /usr/local instead of $out)
 
 **Solution**:
+
 1. Ensure the CMakeLists.txt uses GNUInstallDirs module variables
 2. Check if `dontAddPrefix` is accidentally set
 3. Verify CMAKE_INSTALL_PREFIX is being respected
@@ -361,6 +370,7 @@ stdenv.mkDerivation {
 **Problem**: Tests pass locally but fail in nix-build
 
 **Solution**:
+
 1. Tests may require network access (not allowed in sandbox)
 2. Tests may require /tmp or other paths - check test output
 3. Use `enableParallelChecking = false;` if tests interfere with each other
@@ -372,6 +382,7 @@ stdenv.mkDerivation {
 **Problem**: Package requires newer CMake than available
 
 **Solution**:
+
 1. Use cmake from a specific version: `nativeBuildInputs = [ cmake.v4 ];`
 2. Check cmake versions. For example, `cmake.variants.*.version`
 3. Override cmake version if needed
@@ -381,6 +392,7 @@ stdenv.mkDerivation {
 **Problem**: Package behaves incorrectly or is unoptimized
 
 **Solution**:
+
 1. Verify `cmakeBuildType` is set appropriately (default: Release)
 2. Release builds are optimized, Debug builds have symbols
 3. Some packages require specific build types for certain features
